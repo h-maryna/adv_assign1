@@ -27,18 +27,19 @@
  <body>
 
   <div id="output" class="container">
-    <p><input class="input-is-primary" type="text" id="search" />&nbsp;<button id="search_btn" class="button">search</button></p>
+      <p><input class="input-is-primary" type="text" id="search" />&nbsp;
+          <button id="search_btn" class="button">search</button></p>
 
-    <div id="results"></div>
+      <div id="results"></div>
 
-    <div class="columns">
+          <div class="columns">
 
-        <div id="booklist" class="column">
-      
-        </div>
+              <div id="booklist" class="column is-half"></div>
+          </div> <!-- .columns -->
+  </div><!-- . container -->
 
-        <div class="column">
-           <div id="modal" class="modal">
+          <div class="column">
+            <div id="modal" class="modal" >
             <div class="modal-background"></div>
             <div class="modal-content">
 
@@ -61,11 +62,14 @@
 
 
    <script>
+
+
       $(document).ready(function(){
       
         $('#booklist').load('server.php');
 
        
+
         });
 
       $(document).ready(function(){
@@ -83,32 +87,20 @@
 
       function showModal(el){
         var id = $(el).attr('data-book_id');
-        $('#bookdetail').fadeOut();
+        $('#modal').modal('show');
         // use load to populate the bookdetail div
         $('#bookdetail').load('server.php?book_id='+id, function(){
-           $('#bookdetail').fadeIn('slow');
+           //$('#bookdetail').modal('open');
         });
+
       }
 
-
-      function showModal(el){
-      var id = el.getAttribute('data-book_id');
-      // new xhr
-      var xhr = new XMLHttpRequest;
-      // open server get ? book_id=id
-      xhr.open('GET', 'server.php?book_id=' + id);
-      // create onreadystatechange handler
-      xhr.onreadystatechange = function(){
-        if(xhr.readyState == 4 && xhr.status == 200){
-          document.getElementById('bookdetail').innerHTML = xhr.responseText;
-          // target modal add class is active
-          document.getElementById('modal').classList.add('is-active');
-        }
-      }
-      // send responseText to the bookdetail\
-      xhr.send(null);
-      
+      function closeModal(){
+        $('#modal').hide('is-active');
     }
+
+
+      
 
    </script>
   </body>

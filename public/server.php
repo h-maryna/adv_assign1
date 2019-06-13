@@ -33,7 +33,7 @@ if(isset($_GET['book_id'])){
 	JOIN publisher USING (publisher_id)
 	JOIN format USING (format_id)
 	JOIN genre USING (genre_id)";
-
+    
 	$params = array();
 	$stmt = $dbh->prepare($query);
     $stmt->execute($params);

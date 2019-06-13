@@ -19,7 +19,7 @@ if(isset($_GET['s'])){
     header('Content-Type: text/html');
     echo '<ul>';
     foreach ($results as $row) {
-    	echo "<li><a href='#'>{$row['title']}</a></li>";
+    	echo "<li><a href='#' onclick="showModal(); return false; data-book_id='{$row["book_id"]}'">{$row['title']}</a></li>";
     }
     echo '</ul>';
 }
