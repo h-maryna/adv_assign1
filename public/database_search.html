@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<p><input type="text" id="search" />&nbsp;<button>search</button></p>
+
   <div id="results" class="container">
 
     <div class="columns">
@@ -17,8 +17,8 @@
       
         </div>
 
-        <div class="column">
-            <div id="bookdetail"></div>  
+        <div class="column" >
+            <div id="bookdetail" onclick="showModal(this)"></div>  
         </div>
       </div>
   </div>
@@ -41,6 +41,15 @@ $(document).ready(function(){
        });
 
   });
+
+function showModal(el){
+        var id = $(el).attr('data-book_id');
+        $('#bookdetail').fadeOut();
+        // use load to populate the bookdetail div
+        $('#bookdetail').load('server.php?book_id='+id, function(){
+           $('#bookdetail').fadeIn('slow');
+        });
+      }
 
 </script>
 

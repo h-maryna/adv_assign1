@@ -1,0 +1,116 @@
+<!doctype html>
+
+<html lang="en"> 
+  <head>
+    
+    <meta charset="utf-8" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <title>First Ajax</title>
+    
+    <style>
+        #bookdetail{
+         display: none;
+        }
+        #search, #search_btn, #results{
+          position: absolute;
+          right: 150px;
+        }
+        #results{
+          margin-top: 25px;
+        }
+    </style>
+  </head> 
+
+ <body>
+
+  <div id="output" class="container">
+    <p><input class="input-is-primary" type="text" id="search" />&nbsp;<button id="search_btn" class="button">search</button></p>
+
+    <div id="results"></div>
+
+    <div class="columns">
+
+        <div id="booklist" class="column">
+      
+        </div>
+
+        <div class="column">
+           <div id="modal" class="modal">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+
+    <div id="bookdetail" class="box">
+      <h2>This is my modal</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <!-- Any other Bulma elements you want -->
+  </div>
+  <div>
+  <button onclick="closeModal()" class="modal-close is-large" aria-label="close"></button></div>
+        </div>
+      </div>
+  </div>
+
+
+
+   <script>
+      $(document).ready(function(){
+      
+        $('#booklist').load('server.php');
+
+       
+        });
+
+      $(document).ready(function(){
+  // capture keystrokes in search box
+      $('#search').keyup(function(e){
+        var data = {};
+        data.s = $(this).val();
+        $.get('search2.php', data, function(response, status, xhr){
+          console.log(response);
+           $('#results').html(response);
+           }, 'html');
+       });
+//this.data = '#search';
+  });
+
+      function showModal(el){
+        var id = $(el).attr('data-book_id');
+        $('#bookdetail').fadeOut();
+        // use load to populate the bookdetail div
+        $('#bookdetail').load('server.php?book_id='+id, function(){
+           $('#bookdetail').fadeIn('slow');
+        });
+      }
+
+
+      function showModal(el){
+      var id = el.getAttribute('data-book_id');
+      // new xhr
+      var xhr = new XMLHttpRequest;
+      // open server get ? book_id=id
+      xhr.open('GET', 'server.php?book_id=' + id);
+      // create onreadystatechange handler
+      xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4 && xhr.status == 200){
+          document.getElementById('bookdetail').innerHTML = xhr.responseText;
+          // target modal add class is active
+          document.getElementById('modal').classList.add('is-active');
+        }
+      }
+      // send responseText to the bookdetail\
+      xhr.send(null);
+      
+    }
+
+   </script>
+  </body>
+
+</html>
