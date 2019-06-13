@@ -1,9 +1,11 @@
 <?php
 
+
+
 $dbh = new PDO('mysql:host=localhost;dbname=booksite', 'root', '' );
 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-if(isset($_GET['book_id'])){
+if(!empty($_GET['book_id'])){
 	$query = "SELECT book.* ,
 	author.name as author,
 	publisher.name as publisher,

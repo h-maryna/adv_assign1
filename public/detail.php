@@ -5,7 +5,7 @@
 <div class="container">
 	<div class="column">
 		<figure>
-			<img src="booksite/images/covers/<?=$book['image']?>" >
+			<img src="images/covers/<?=$book['image']?>" >
 		</figure>
    </div>
    <div class="column">

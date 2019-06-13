@@ -10,7 +10,7 @@
 
 	<?php foreach($result as $row) : ?>
 		<tr>
-			<td><?=htmlspecialchars($row['title'])?></a></td>
+			<td><?=htmlspecialchars($row['title'])?></td>
 			<td><?=htmlspecialchars($row['author'])?></td>
 			<td><?=htmlspecialchars($row['genre'])?></td>
 			<td><?=htmlspecialchars($row['year_published'])?></td>
