@@ -10,7 +10,8 @@ if(!empty($_GET['book_id'])){
 	author.name as author,
 	publisher.name as publisher,
 	format.name as format,
-	genre.name as genre 
+	genre.name as genre,
+	book.price as price 
 	FROM book
 	JOIN author USING (author_id)
 	JOIN publisher USING (publisher_id)
@@ -24,18 +25,38 @@ if(!empty($_GET['book_id'])){
     $book = $stmt->fetch(PDO::FETCH_ASSOC);
     include 'detail.php';
     
-} else{
+} elseif(!empty($_GET['s'])){
 	$query = "SELECT book.*,
 	author.name as author,
 	publisher.name as publisher,
 	format.name as format,
-	genre.name as genre 
+	genre.name as genre,
+	book.price as price  
+	FROM book
+	JOIN author USING (author_id)
+	JOIN publisher USING (publisher_id)
+	JOIN format USING (format_id)
+	JOIN genre USING (genre_id)
+	WHERE book.title LIKE :search";
+    
+	$params = array(':search' => "%{$_GET['s']}%");
+	$stmt = $dbh->prepare($query);
+    $stmt->execute($params);
+
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    include 'booklist.php';
+}else{
+	$query = "SELECT book.*,
+	author.name as author,
+	publisher.name as publisher,
+	format.name as format,
+	genre.name as genre,
+	book.price as price  
 	FROM book
 	JOIN author USING (author_id)
 	JOIN publisher USING (publisher_id)
 	JOIN format USING (format_id)
 	JOIN genre USING (genre_id)";
-    
 	$params = array();
 	$stmt = $dbh->prepare($query);
     $stmt->execute($params);

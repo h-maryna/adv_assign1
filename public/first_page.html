@@ -15,7 +15,6 @@
         #search, #search_btn, #results{
           position: absolute;
           right: 150px;
-          z-index: 1000;
         }
         #results{
           margin-top: 35px;
@@ -26,8 +25,8 @@
  <body>
 
   <div id="output" class="container">
-      <p><input class="input" type="text" id="search" placeholder="Search book ..." />&nbsp;
-          <button id="search_btn" class="button" type="submit">search</button></p>
+      <p><input type="text" id="search" placeholder="Search book ..." />&nbsp;
+          <button id="search_btn" onclick="searchBooks()">search</button></p>
 
       <div id="results"></div>
 
@@ -37,57 +36,77 @@
           </div>
   </div>
 
-          <div class="column">
-            <div id="modal" class="modal" >
-            <div class="modal-background"></div>
-            <div class="modal-content">
+      <div class="column">
+        <div id="modal" class="modal" >
+        <div class="modal-background"></div>
+        <div class="modal-content">
+    
 
     <div id="bookdetail" class="box">
   </div>
+</div>
+
   <div>
   <button onclick="closeModal()" class="modal-close is-large" aria-label="close"></button></div>
-        </div>
-      </div>
-  </div>
-
-
 
    <script>
 
 
-      $(document).ready(function(){
-      
-        $('#booklist').load('server.php');
+    $(document).ready(function(){
+    
+      $('#booklist').load('server.php');
 
-       
+     
 
-        });
+      });
 
-      $(document).ready(function(){
-  // capture keystrokes in search box
-      $('#search').keyup(function(e){
-        var data = {};
-        data.s = $(this).val();
-        $.get('search2.php', data, function(response, status, xhr){
-          //console.log(response);
-           $('#results').html(response);
-           }, 'html');
-       });
-//this.data = '#search';
-  });
+    $(document).ready(function(){
+// capture keystrokes in search box
+    $('#search').keyup(function(e){
+      var data = {};
+      data.s = $(this).val();
+      $.get('search2.php', data, function(response, status, xhr){
+        //console.log(response);
+         $('#results').html(response);
+         }, 'html');
+     });
+});
 
-    function showModal(el){
+/**
+ * function for open modal box
+ * takes book_ai as an ittribute
+ * modal box
+ */
 
-        var id = $(el).attr('data-book_id');
-        //console.log(id);
-        // use load to populate the bookdetail div
-        $('#bookdetail').load('server.php?book_id='+id);
-           $('#modal').addClass('is-active');
-      }
+  function showModal(el){
 
-      function closeModal(){
-        $('#modal').removeClass('is-active');
-    } 
+      var id = $(el).attr('data-book_id');
+      //console.log(id);
+      // use load to populate the bookdetail div
+      $('#bookdetail').load('server.php?book_id='+id);
+      //$('#modal').fadeOut();
+      $('#modal').addClass('is-active');
+    }
+/**
+ * fucntion for closing modal
+ * @return VOID
+ */
+  function closeModal(){
+      $('#modal').removeClass('is-active');
+  } 
+
+/**
+ * function for outputting search list 
+ * based on search, takes from server book.title
+ * data 
+ */
+  function searchBooks(){
+      var data = {};
+      data.s = document.querySelector('#search').value;
+      $.get('server.php', data, function(response){
+          $('#booklist').html(response);
+      }, 'html');
+  }
 
 
       
