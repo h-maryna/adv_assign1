@@ -1,3 +1,12 @@
+<!--
+  WDD4
+ * Advanced PHP
+ * Instructor: Steve George
+ * Author: Maryna Haidashevska
+ * Date: June 13, 2019
+ */
+-->
+
 <!doctype html>
 
 <html lang="en"> 
@@ -74,14 +83,20 @@
 
    <script>
 
-
+/**
+ * loaded DOM to allow load data
+ * @param  #booklist
+ * @return server.php
+ */
     $(document).ready(function(){
-    
-      $('#booklist').load('server.php');
+        $('#booklist').load('server.php');
+        });
 
-     
-
-      });
+/**
+ * loade DOM to allow load data
+ * @param  #search
+ * @return #results
+ */
 
     $(document).ready(function(){
 // capture keystrokes in search box
@@ -107,8 +122,9 @@
       //console.log(id);
       // use load to populate the bookdetail div
       $('#bookdetail').load('server.php?book_id='+id);
-      //$('#modal').fadeOut();
+      $('#modal').fadeOut();
       $('#modal').addClass('is-active');
+      $('#modal').animate('0.5s');
     }
 /**
  * fucntion for closing modal

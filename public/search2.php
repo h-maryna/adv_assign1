@@ -17,11 +17,10 @@ if(!empty($_GET['s'])){
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     header('Content-Type: text/html');
     echo '<ul>';
-
     foreach ($results as $row) {
         echo "<li><a href='#' onclick='showModal(this); return false;' data-book_id='{$row['book_id']}'>{$row['title']}</a></li>";
     }
     echo '</ul>';
-}
+} 
 
 

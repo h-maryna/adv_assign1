@@ -5,6 +5,7 @@
 $dbh = new PDO('mysql:host=localhost;dbname=booksite', 'root', '' );
 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+// check if we get some id from get request
 if(!empty($_GET['book_id'])){
 	$query = "SELECT book.* ,
 	author.name as author,
@@ -24,7 +25,7 @@ if(!empty($_GET['book_id'])){
     $book = $stmt->fetch(PDO::FETCH_ASSOC);
     include 'detail.php';
     
-} elseif(!empty($_GET['s'])){
+} elseif(!empty($_GET['s'])){ // check if not empty our search
 	$query = "SELECT book.*,
 	author.name as author,
 	publisher.name as publisher,
@@ -62,12 +63,7 @@ if(!empty($_GET['book_id'])){
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     include 'booklist.php';
 }
-?>
 
-<?php if(!empty($_GET['s'])) : ?>
-	<h3>Your search for <span class="search"><?=e($_GET['s'])?>
-                    </span> returned <?=count($results)?> result(s)</h3>
-    <?php include 'booklist.php'; ?>
-   
-    <?php endif;?>
+
+
 
