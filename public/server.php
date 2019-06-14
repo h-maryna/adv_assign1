@@ -10,8 +10,7 @@ if(!empty($_GET['book_id'])){
 	author.name as author,
 	publisher.name as publisher,
 	format.name as format,
-	genre.name as genre,
-	book.price as price 
+	genre.name as genre 
 	FROM book
 	JOIN author USING (author_id)
 	JOIN publisher USING (publisher_id)
@@ -30,8 +29,7 @@ if(!empty($_GET['book_id'])){
 	author.name as author,
 	publisher.name as publisher,
 	format.name as format,
-	genre.name as genre,
-	book.price as price  
+	genre.name as genre 
 	FROM book
 	JOIN author USING (author_id)
 	JOIN publisher USING (publisher_id)
@@ -50,13 +48,13 @@ if(!empty($_GET['book_id'])){
 	author.name as author,
 	publisher.name as publisher,
 	format.name as format,
-	genre.name as genre,
-	book.price as price  
+	genre.name as genre 
 	FROM book
 	JOIN author USING (author_id)
 	JOIN publisher USING (publisher_id)
 	JOIN format USING (format_id)
 	JOIN genre USING (genre_id)";
+    
 	$params = array();
 	$stmt = $dbh->prepare($query);
     $stmt->execute($params);
@@ -64,4 +62,12 @@ if(!empty($_GET['book_id'])){
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     include 'booklist.php';
 }
+?>
+
+<?php if(!empty($_GET['s'])) : ?>
+	<h3>Your search for <span class="search"><?=e($_GET['s'])?>
+                    </span> returned <?=count($results)?> result(s)</h3>
+    <?php include 'booklist.php'; ?>
+   
+    <?php endif;?>
 

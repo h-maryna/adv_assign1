@@ -16,38 +16,61 @@
           position: absolute;
           right: 150px;
         }
+        #output{
+          margin-top: 15px;
+        }
+        #booklist{
+          margin-top: 25px;
+        }
         #results{
-          margin-top: 35px;
+          margin-top: 45px;
+        }
+
+        #results ul li a{
+          color: #000;
+          font-size: 18px;
+          font-style: italic;
+          padding: 15px;
+        }
+        input{
+          height: 35px;
+          width: 350px;
         }
     </style>
   </head> 
 
  <body>
 
-  <div id="output" class="container">
-      <p><input type="text" id="search" placeholder="Search book ..." />&nbsp;
-          <button id="search_btn" onclick="searchBooks()">search</button></p>
+<div id="output" class="container">
+    <p><input  
+              type="text" 
+              id="search" 
+              placeholder="Search book ..." />&nbsp;
+        <button class="button is-dark" 
+                id="search_btn" 
+                onclick="searchBooks()">search
+        </button>
+    </p>
 
-      <div id="results"></div>
+    <div id="results"></span></p></div>
 
-          <div class="columns">
+        <div class="columns is-mobile">
 
-              <div id="booklist" class="column is-half"></div>
-          </div>
-  </div>
+            <div id="booklist" class="column is-four-fifths-mobile"></div>
 
-      <div class="column">
-        <div id="modal" class="modal" >
-        <div class="modal-background"></div>
+        </div> <!-- . columns -->
+</div> <!-- . container -->
+
+
+<div id="modal" class="modal" >
+    <div class="modal-background"></div>
         <div class="modal-content">
-    
+            <div id="bookdetail" class="box"></div>
+        </div>
+        <button onclick="closeModal()" class="modal-close is-large" aria-label="close">
+        </button>
+</div><!-- .modal -->
 
-    <div id="bookdetail" class="box">
-  </div>
-</div>
-
-  <div>
-  <button onclick="closeModal()" class="modal-close is-large" aria-label="close"></button></div>
 
    <script>
 
@@ -107,6 +130,7 @@
           $('#booklist').html(response);
       }, 'html');
   }
+
 
 
       

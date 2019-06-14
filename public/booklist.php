@@ -1,12 +1,14 @@
 <h2 class="title">Book List</h2>
 
 <table class="table is-bordered">
-	<tr>
-		<th>Title</th>
-		<th>Author</th>
-		<th>Genre</th>
-		<th>Year</th>
-	</tr>
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>Author</th>
+			<th>Genre</th>
+			<th>Year</th>
+		</tr>
+    </thead>
 
 	<?php foreach($result as $row) : ?>
 		<tr>

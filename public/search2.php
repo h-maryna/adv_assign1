@@ -14,14 +14,14 @@ if(!empty($_GET['s'])){
     $params = array(':search' => "%{$_GET['s']}%");
 	$stmt = $dbh->prepare($query);
     $stmt->execute($params);
-
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     header('Content-Type: text/html');
     echo '<ul>';
-    
+
     foreach ($results as $row) {
         echo "<li><a href='#' onclick='showModal(this); return false;' data-book_id='{$row['book_id']}'>{$row['title']}</a></li>";
-    	//echo "<li><a href='#' onclick="showModal(); return false; data-book_id='{$row["book_id"]}'">{$row['title']}</a></li>";
     }
     echo '</ul>';
 }
+
+
